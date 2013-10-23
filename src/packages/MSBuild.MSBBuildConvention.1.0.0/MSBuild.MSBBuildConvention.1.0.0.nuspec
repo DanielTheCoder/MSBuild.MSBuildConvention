@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>MSBuild.MSBBuildConvention</id>
+    <version>1.0.0</version>
+    <title>MSBuild project build convention target structure</title>
+    <authors>Daniel Sack</authors>
+    <owners>Daniel Sack</owners>
+    <licenseUrl>https://raw.github.com/DanielTheCoder/MSBuild.MSBNuget/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/DanielTheCoder/MSBuild.MSBNuget</projectUrl>
+    <iconUrl>https://raw.github.com/DanielTheCoder/MSBuild.MSBNuget/master/media/MSBuild.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Convention based build pipeline for custom MSBuild projects</description>
+    <releaseNotes>https://raw.github.com/DanielTheCoder/MSBuild.MSBNuget/master/changelog.txt</releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <tags>MSBuild Package</tags>
+  </metadata>
+</package>

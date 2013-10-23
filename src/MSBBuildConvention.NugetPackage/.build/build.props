@@ -1,0 +1,14 @@
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+  
+  <PropertyGroup>
+    <NugetPackagesCustomConfiguration Condition="'$(NugetPackagesCustomConfiguration)'==''">$(COMPUTERNAME)</NugetPackagesCustomConfiguration>
+
+    <_nugetPackagesCustomConfigurationImportPath>$(MSBuildThisFileDirectory)Configurations\$(NugetPackagesCustomConfiguration).props</_nugetPackagesCustomConfigurationImportPath>
+    <_nugetPackagesCustomConfigurationImportPath Condition="Exists('$(_nugetPackagesCustomConfigurationImportPath)')=='false'">$(MSBuildThisFileDirectory)Configurations\default.props</_nugetPackagesCustomConfigurationImportPath>
+  </PropertyGroup>
+
+  <!-- Conventional import of custom settings -->
+  <Import Project="$(_nugetPackagesCustomConfigurationImportPath)" Condition="Exists('$(_nugetPackagesCustomConfigurationImportPath)')=='true'"/>
+  <Import Project="$(MSBuildProjectDirectory)\*\*.nuspec.props"/>
+  
+</Project>

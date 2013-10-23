@@ -1,0 +1,9 @@
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <ItemGroup>
+    <additionalFiles Include="$(MSBuildProjectDirectory)\..\MSBBuildConvention\build.targets">
+      <targetFolder>MSBBuildConvention/content/.build</targetFolder>
+    </additionalFiles>
+  </ItemGroup>
+  
+</Project>

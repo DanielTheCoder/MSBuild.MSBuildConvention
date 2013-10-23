@@ -1,0 +1,4 @@
+1.0.0 - 2013/08/18 (Initial publish )
+Fixed issues:
+New Features:
+Changes:
