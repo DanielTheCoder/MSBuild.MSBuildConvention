@@ -29,6 +29,7 @@
     <BuildDependsOn/>
 
     <NugetBuildTargets>
+      NugetCommandLineEval;
       NugetCleanupFolderStructure;
       NugetCreateFolderStructure;
       NugetCopyAdditionalFiles;
@@ -57,10 +58,29 @@
 
   </PropertyGroup>
 
+  <!-- List of *.nuspec files which should be transformed -->
   <ItemGroup>
     <nuspec Include="$(MSBuildProjectDirectory)\**\*.nuspec"/>
   </ItemGroup>
 
+  <!-- Evaluate nuget.exe from NugetPackage dependency -->
+  <!-- TODO: Bug, we maybe get more than one nuget.exe back, we need to handle this better -->
+  <PropertyGroup>
+    <NuGetToolsPath Condition="'$(NuGetToolsPath)' == ''">$(MSBuildThisFileDirectory)..\..\NuGet.CommandLine.*\tools\</NuGetToolsPath>
+    <NugetCommandLinePath Condition="'$(NugetCommandLinePath)' == ''">$(NuGetToolsPath)Nuget.exe</NugetCommandLinePath>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <nugetExe Include="$(NugetCommandLinePath)"/>
+  </ItemGroup>
+  
+  <PropertyGroup>
+    <_nugetCommandPack>"@(nugetExe)" pack -OutputDirectory &quot;$(NugetIntermediatePath.TrimEnd('\'))&quot; -NoDefaultExcludes</_nugetCommandPack>
+    <_nugetCommandPack Condition="'$(NugetVersion)' != ''">$(_nugetCommandPack) -Version &quot;$(NugetVersion)&quot;</_nugetCommandPack>
+    <_nugetCommandPack Condition="'$(NugetMinClientVersion)' != ''">$(_nugetCommandPack) -MinClientVersion &quot;$(NugetMinClientVersion)&quot;</_nugetCommandPack>
+    <_nugetCommandPack Condition="'$(NugetCommandPackArguments)' != ''">$(_nugetCommandPack) $(NugetCommandPackArguments) </_nugetCommandPack>
+  </PropertyGroup>
+  
 
 
   <Target Name="NugetBuild">
@@ -81,6 +101,15 @@
   </Target>
 
 
+  <Target Name="NugetCommandLineEval">
+    <Message Text="Nuget Exe" Importance="normal"/>
+    <Message Text="--> NuGetToolsPath: $(NuGetToolsPath)" Importance="normal"/>
+    <Message Text="--> NugetCommandLinePath: $(NugetCommandLinePath)" Importance="normal"/>
+    <Message Text="--> nugetExe: @(nugetExe)" Importance="normal"/>
+
+    <Error Text="nuget.exe not found! @(nugetExe)" Condition="'@(nugetExe->Count())' == '0'" />
+    <Error Text="More than one nuget.exe found, we support only one. @(nugetExe)" Condition="'@(nugetExe->Count())' != '1'" />
+  </Target>
 
 
   <Target Name="NugetCreatePackages">
@@ -162,30 +191,9 @@
   </Target>
 
   <Target Name="NugetCreatePackage" >
-    <!-- Evaluate nuget.exe from NugetPackage dependency -->
-    <PropertyGroup>
-      <NuGetToolsPath Condition="'$(NuGetToolsPath)' == ''">$(MSBuildThisFileDirectory)..\..\NuGet.CommandLine.*\tools\</NuGetToolsPath>
-      <NugetCommandLinePath Condition="'$(NugetCommandLinePath)' == ''">$(NuGetToolsPath)Nuget.exe</NugetCommandLinePath>
-    </PropertyGroup>
-
     <ItemGroup>
       <nuspecStaged Include="$(NugetStage)%(nuspec.Filename)\*.nuspec"/>
-      <!-- Evaluate nuget.exe from NugetPackage dependency -->
-      <!-- TODO: Bug, we maybe get more than one nuget.exe back, we need to handle this better -->
-      <nugetExe Include="$(NugetCommandLinePath)"/>
     </ItemGroup>
-
-    <PropertyGroup>
-      <_nugetCommandPack>"@(nugetExe)" pack -OutputDirectory &quot;$(NugetIntermediatePath.TrimEnd('\'))&quot; -NoDefaultExcludes</_nugetCommandPack>
-      <_nugetCommandPack Condition="'$(NugetVersion)' != ''">$(_nugetCommandPack) -Version &quot;$(NugetVersion)&quot;</_nugetCommandPack>
-      <_nugetCommandPack Condition="'$(NugetMinClientVersion)' != ''">$(_nugetCommandPack) -MinClientVersion &quot;$(NugetMinClientVersion)&quot;</_nugetCommandPack>
-      <_nugetCommandPack Condition="'$(NugetCommandPackArguments)' != ''">$(_nugetCommandPack) $(NugetCommandPackArguments) </_nugetCommandPack>
-    </PropertyGroup>
-
-    <Message Text="Nuget Exe" Importance="normal"/>
-    <Message Text="--> NuGetToolsPath: $(NuGetToolsPath)" Importance="normal"/>
-    <Message Text="--> NugetCommandLinePath: $(NugetCommandLinePath)" Importance="normal"/>
-    <Message Text="--> nugetExe: @(nugetExe)" Importance="normal"/>
 
     <Message Text="Nuget Global Override" Importance="normal"/>
     <Message Text="--> NugetVersion: $(NugetVersion)" Importance="normal"/>
@@ -195,9 +203,6 @@
     <Message Text="nuspecs-Count: @(nuspecStaged->Count())" Importance="normal"/>
     <Message Text="nuspecs: @(nuspecStaged)" Importance="normal"/>
     <Message Text="  %(nuspecStaged.Identity)" Importance="normal" />
-
-    <Error Text="nuget.exe not found! @(nugetExe)" Condition="'@(nugetExe->Count())' == '0'" />
-    <Error Text="More than one nuget.exe found, we support only one. @(nugetExe)" Condition="'@(nugetExe->Count())' != '1'" />
 
     <MakeDir Directories="$(NugetIntermediatePath)" />
 
@@ -243,7 +248,7 @@
       <nupkg Include="$(NugetIntermediatePath)**\*.nupkg"/>
     </ItemGroup>
 
-    <Exec Command="nuget push %(nupkg.Identity)" ContinueOnError="true" />
+    <Exec Command="&quot;@(nugetExe)&quot; push %(nupkg.Identity)" ContinueOnError="true" />
 
     <Message Text="PublishedTo: http://www.nuget.org/packages/%(nupkg.Identity)/" Importance="high" />
   </Target>
