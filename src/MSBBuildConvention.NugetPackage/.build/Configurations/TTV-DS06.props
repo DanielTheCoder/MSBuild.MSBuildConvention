@@ -1,0 +1,12 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <!-- MSBuild.MSBNuget MSBuild properties with 'noe.Core.NugetPackages' default values -->
+  <PropertyGroup Label="Package Creation Configuration Settings">
+    <NugetPublishToReleaseFolder Condition="'$(NugetPublishToReleaseFolder)'==''">true</NugetPublishToReleaseFolder>
+    <NugetPublishToLocalNugetFeed Condition="'$(NugetPublishToLocalNugetFeed)'==''">true</NugetPublishToLocalNugetFeed>
+
+    <NugkgPublishLocalNugetFeedFolder Condition="'$(NugkgPublishLocalNugetFeedFolder)'==''">D:\Documents\SkyDrive\Development\_Galleries\nuget\MSBuild\</NugkgPublishLocalNugetFeedFolder>
+    <NugkgPublishReleaseFolder Condition="'$(NugkgPublishReleaseFolder)'==''">$(MSBuildProjectDirectory)\..\..\Releases\</NugkgPublishReleaseFolder>
+  </PropertyGroup>
+  
+</Project>

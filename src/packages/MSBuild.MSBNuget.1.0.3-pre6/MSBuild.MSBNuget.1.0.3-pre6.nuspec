@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>MSBuild.MSBNuget</id>
+    <version>1.0.3-pre6</version>
+    <title>Nuget convention based MSBuild Packager</title>
+    <authors>Daniel Sack</authors>
+    <owners>Daniel Sack</owners>
+    <licenseUrl>https://raw.github.com/DanielTheCoder/MSBuild.MSBNuget/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/DanielTheCoder/MSBuild.MSBNuget</projectUrl>
+    <iconUrl>https://raw.github.com/DanielTheCoder/MSBuild.MSBNuget/master/media/MSBNuget.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Convention based nuget package creator build as msbuild script</description>
+    <releaseNotes>https://raw.github.com/DanielTheCoder/MSBuild.MSBNuget/master/changelog.txt</releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <tags>NuGet MSBuild Package</tags>
+    <dependencies>
+      <dependency id="MSBuild.MSBBuildConvention" />
+      <dependency id="NuGet.CommandLine" version="2.7.1" />
+    </dependencies>
+  </metadata>
+</package>
