@@ -9,6 +9,5 @@
 
   <!-- Conventional import of custom settings -->
   <Import Project="$(_nugetPackagesCustomConfigurationImportPath)" Condition="Exists('$(_nugetPackagesCustomConfigurationImportPath)')=='true'"/>
-  <Import Project="$(MSBuildProjectDirectory)\*\*.nuspec.props"/>
   
 </Project>

@@ -1,0 +1,44 @@
+﻿<!--
+  MSBBuildConvention is a collection of MSBuild scripts to support convention based MSBuild project creation
+  Copyright (C) 2013  Daniel Sack
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see [http://www.gnu.org/licenses/].
+  -->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <!-- Convention targets -->
+  <PropertyGroup>
+    <BuildTargets>$(BuildDependsOn);$(BuildTargets)</BuildTargets>
+    <CleanTargets>$(CleanTargets)</CleanTargets>
+    <RebuildTargets>$(RebuildTargets)</RebuildTargets>
+    <PublishTargets>$(PublishTargets)</PublishTargets>
+  </PropertyGroup>
+  
+  <Target Name="Build">
+    <CallTarget Targets="$(BuildTargets)" />
+  </Target>
+
+  <Target Name="Clean">
+    <CallTarget Targets="$(CleanTargets)" />
+  </Target>
+
+  <Target Name="Rebuild">
+    <CallTarget Targets="$(RebuildTargets)" />
+  </Target>
+
+  <Target Name="Publish">
+    <CallTarget Targets="$(PublishTargets)"/>
+  </Target>
+
+</Project>

@@ -18,26 +18,17 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
 
   <PropertyGroup>
-    <BuildTargets>$(BuildDependsOn);</BuildTargets>
-    <CleanTargets/>
-    <RebuildTargets/>
-    <PublishTargets/>
+    <BuildTargets>
+      $(BuildTargets);
+      Legacy_100_Warnings;
+    </BuildTargets>
   </PropertyGroup>
+
+  <Target Name="Legacy_100_Warnings">
+    <!-- 1.0.0 -->
+    <Error Condition="Exists('$(MSBuildProjectDirectory)\.build\build.targets')" Text="build.targets was moved to the 'package/build' folder! To fix this issue delete the file and remove the project import!"/>
+    <Error Condition="Exists('$(MSBuildProjectDirectory)\.build\build.props')" Text="build.props was moved to the 'properties/build.props' folder! To fix this issue move the file and fix the project import!"/>
+
+  </Target>
   
-  <Target Name="Build">
-    <CallTarget Targets="$(BuildTargets)" />
-  </Target>
-
-  <Target Name="Clean">
-    <CallTarget Targets="$(CleanTargets)" />
-  </Target>
-
-  <Target Name="Rebuild">
-    <CallTarget Targets="$(RebuildTargets)" />
-  </Target>
-
-  <Target Name="Publish">
-    <CallTarget Targets="$(PublishTargets)"/>
-  </Target>
-
 </Project>

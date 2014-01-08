@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
-  <metadata>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
+  <metadata minClientVersion="2.7.2">
     <id>MSBuild.MSBNuget</id>
-    <version>1.0.3-pre6</version>
+    <version>1.1.1-pre1</version>
     <title>Nuget convention based MSBuild Packager</title>
     <authors>Daniel Sack</authors>
     <owners>Daniel Sack</owners>
@@ -16,7 +16,7 @@
     <tags>NuGet MSBuild Package</tags>
     <dependencies>
       <dependency id="MSBuild.MSBBuildConvention" />
-      <dependency id="NuGet.CommandLine" version="2.7.1" />
+      <dependency id="NuGet.CommandLine" version="2.7.3" />
     </dependencies>
   </metadata>
 </package>

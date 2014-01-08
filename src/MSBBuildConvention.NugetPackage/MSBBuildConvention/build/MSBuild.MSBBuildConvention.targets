@@ -16,28 +16,15 @@
   along with this program.  If not, see [http://www.gnu.org/licenses/].
   -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
-
-  <PropertyGroup>
-    <BuildTargets>$(BuildDependsOn);</BuildTargets>
-    <CleanTargets/>
-    <RebuildTargets/>
-    <PublishTargets/>
-  </PropertyGroup>
+  <!-- Wrapper .targets file which collects all the imports which are needed for this nuget package -->
   
-  <Target Name="Build">
-    <CallTarget Targets="$(BuildTargets)" />
-  </Target>
+  <!-- Migration warnings for v1.0.0 based projects -->
+  <Import Project="Legacy.100.targets" />
 
-  <Target Name="Clean">
-    <CallTarget Targets="$(CleanTargets)" />
-  </Target>
-
-  <Target Name="Rebuild">
-    <CallTarget Targets="$(RebuildTargets)" />
-  </Target>
-
-  <Target Name="Publish">
-    <CallTarget Targets="$(PublishTargets)"/>
-  </Target>
-
+  <!-- Import custom build.props from C# Properties folder-->
+  <Import Project="$(MSBuildProjectDirectory)\Properties\build.props" />
+  
+  <!-- Import conventional targets file -->
+  <Import Project="build.targets" />
+  
 </Project>

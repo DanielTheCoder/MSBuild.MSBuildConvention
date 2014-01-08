@@ -5,8 +5,8 @@
     <NugetPublishToReleaseFolder Condition="'$(NugetPublishToReleaseFolder)'==''">false</NugetPublishToReleaseFolder>
     <NugetPublishToLocalNugetFeed Condition="'$(NugetPublishToLocalNugetFeed)'==''">false</NugetPublishToLocalNugetFeed>
 
-    <NugkgPublishLocalNugetFeedFolder Condition="'$(NugkgPublishLocalNugetFeedFolder)'==''">$(MSBuildProjectDirectory)\..\..\Publish\</NugkgPublishLocalNugetFeedFolder>
-    <NugkgPublishReleaseFolder Condition="'$(NugkgPublishReleaseFolder)'==''">$(MSBuildProjectDirectory)\..\..\Releases\</NugkgPublishReleaseFolder>
+    <NugetPublishLocalNugetFeedFolder Condition="'$(NugetPublishLocalNugetFeedFolder)'==''">$(MSBuildProjectDirectory)\..\..\Publish\</NugetPublishLocalNugetFeedFolder>
+    <NugetPublishReleaseFolder Condition="'$(NugetPublishReleaseFolder)'==''">$(MSBuildProjectDirectory)\..\..\Releases\</NugetPublishReleaseFolder>
   </PropertyGroup>
   
 </Project>

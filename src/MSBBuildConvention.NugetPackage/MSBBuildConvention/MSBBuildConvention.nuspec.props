@@ -2,7 +2,10 @@
 
   <ItemGroup>
     <additionalFiles Include="$(MSBuildProjectDirectory)\..\MSBBuildConvention\build.targets">
-      <targetFolder>MSBBuildConvention/content/.build</targetFolder>
+      <targetFolder>MSBBuildConvention/build</targetFolder>
+    </additionalFiles>
+    <additionalFiles Include="$(MSBuildProjectDirectory)\..\MSBBuildConvention\build.props">
+      <targetFolder>MSBBuildConvention/content/Properties</targetFolder>
     </additionalFiles>
   </ItemGroup>
   

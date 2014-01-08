@@ -1,3 +1,12 @@
+2.0.0-alpha01 - 2013/12/17
+Package structure changed to use nuget 2.0 supported 'build' folder structure.
+
+Changes:
+- build.targets moved to nuget package under package/build
+- build.props moved to project/properties
+New Features:
+- MSBuild.MSBBuildConvention.targets imports .props and .targets
+
 1.0.0 - 2013/08/18 (Initial publish )
 Fixed issues:
 New Features:
